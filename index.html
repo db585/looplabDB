@@ -13,32 +13,33 @@
   <title>Bootstrap Theme</title>
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<body data-spy="scroll" data-target="#main-nav" id="home">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" id="main-nav">
     <div class="container">
       <a href="index.html" class="navbar-brand">LoopLAB</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class=" navbar-nav ml-auto">
-          <li class=" nav-item">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
             <a href="#home" class="nav-link">Home</a>
           </li>
-          <li class=" nav-item">
+          <li class="nav-item">
             <a href="#explore-head-section" class="nav-link">Explore</a>
           </li>
-          <li class=" nav-item">
+          <li class="nav-item">
             <a href="#create-head-section" class="nav-link">Create</a>
           </li>
-          <li class=" nav-item">
+          <li class="nav-item">
             <a href="#share-head-section" class="nav-link">Share</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <!-- Home section -->
+
+  <!-- HOME SECTION -->
   <header id="home-section">
     <div class="dark-overlay">
       <div class="home-inner container">
@@ -165,8 +166,9 @@
     </div>
   </section>
 
+
   <!-- CREATE HEAD -->
-  <section id="create-head-section" class=" bg-primary">
+  <section id="create-head-section" class="bg-primary">
     <div class="container">
       <!-- Grid start -->
       <div class="row">
@@ -285,6 +287,56 @@
     </div>
   </section>
 
+
+  <!-- FOOTER -->
+  <footer class="main-footer bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center py-4">
+          <h3>LoopLAB</h3>
+          <p>Copyright &copy; <span id="year"></span> </p>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#contactModal">Contact Us</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- CONTACT MODAL -->
+  <div id="contactModal" class="modal fade text-dark">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Contact Us</h5>
+          <button class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="msg">Your Message</label>
+              <textarea name="msg" class="form-control"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary btn-block">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -295,6 +347,31 @@
   <script>
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
+
+    // Init scrollspy
+    $('body').scrollspy({
+      target: '#main-nav'
+    });
+
+    // Add smooth scrolling
+    $('#main-nav a').on('click', function (e) {
+      // Check for hash
+      if (this.hash !== '') {
+        // Preventing default behavior
+        e.preventDefault();
+
+        // Bind hash
+        const hash = this.hash;
+
+        // Animate smooth scroll
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 900, function () {
+          // Add hash to URL after scroll
+          window.location.hash = hash;
+        })
+      }
+    })
   </script>
 </body>
 
